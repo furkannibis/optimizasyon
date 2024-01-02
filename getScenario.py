@@ -50,7 +50,9 @@ def writeScenario():
 
     conn = sqlite3.connect('dbs/scenario.db')
     c = conn.cursor()
-    for i in tqdm(desc="Senaryo veritabanına aktarılıyor", iterable=range(20)):
+
+    user_input = input("Senaryo sayısı giriniz: ")
+    for i in tqdm(desc="Senaryo veritabanına aktarılıyor", iterable=range(user_input)):
         distance = choice(distances)
         difficulty_score = calculateDifficultyScore(distance[2], distance[3])
         c.execute('INSERT INTO scenario VALUES (?, ?, ?, ?)', (i + 1, distance[0], distance[1], difficulty_score))
