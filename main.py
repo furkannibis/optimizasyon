@@ -3,6 +3,7 @@ from getCoordinates import *
 from getDistance import *
 from getScenario import *
 from getNodeMap import *
+from dijstraAlgoritm import *
 import os
 
 
@@ -24,8 +25,12 @@ def main():
         createScenarioDB()
         writeScenario()
 
-    if not os.path.exists("node_map.png"):
+    if not os.path.exists("media/node_map.png"):
         getNodeMap()
+
+    if not os.path.exists("media/result.png"):
+        scenario = readScenarioDB()
+        createNodes(scenario)
 
 
 if __name__ == '__main__':

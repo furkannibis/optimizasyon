@@ -15,10 +15,8 @@ def getNodeMap():
     for i in scenario:
         G.add_edge(i[1], i[2], weight=i[3])
 
-    pos = nx.spring_layout(G)
-    nx.draw_networkx_nodes(G, pos, node_size=10)
-    nx.draw_networkx_edges(G, pos, width=0.5)
-    nx.draw_networkx_labels(G, pos, font_size=5, font_family="sans-serif")
-    plt.axis("off")
-    plt.savefig("media/node_map.png", dpi=1000)
+    pos = nx.spring_layout(G, k=2.0)
+    nx.draw(G, pos, with_labels=True, font_weight='bold')
+    plt.savefig("media/node_map.png")
+
     print("Node map çizildi.")
