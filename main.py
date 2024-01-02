@@ -2,6 +2,7 @@ from getCities import *
 from getCoordinates import *
 from getDistance import *
 from getScenario import *
+from getNodeMap import *
 import os
 
 
@@ -22,6 +23,9 @@ def main():
     if not os.path.exists("dbs/scenario.db"):
         createScenarioDB()
         writeScenario()
+
+    if not os.path.exists("node_map.png"):
+        getNodeMap()
 
 
 if __name__ == '__main__':

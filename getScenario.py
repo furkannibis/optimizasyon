@@ -1,14 +1,17 @@
 import sqlite3
 from random import randint, choice
+from tqdm import tqdm
 
 
 def createScenarioDB():
+    print("Senaryo veritabanı oluşturuluyor...")
     conn = sqlite3.connect('dbs/scenario.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE scenario
                  (id INTEGER PRIMARY KEY, city1 TEXT, city2 TEXT, difficulty_score INTEGER)''')
     conn.commit()
     conn.close()
+    print("Senaryo veritabanı oluşturuldu.")
 
 
 def calculateDifficultyScore(distance, weather):
@@ -47,7 +50,7 @@ def writeScenario():
 
     conn = sqlite3.connect('dbs/scenario.db')
     c = conn.cursor()
-    for i in range(100):
+    for i in tqdm(desc="Senaryo veritabanına aktarılıyor", iterable=range(1000)):
         distance = choice(distances)
         difficulty_score = calculateDifficultyScore(distance[2], distance[3])
         c.execute('INSERT INTO scenario VALUES (?, ?, ?, ?)', (i + 1, distance[0], distance[1], difficulty_score))
