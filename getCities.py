@@ -4,6 +4,9 @@ import sqlite3
 from tqdm import tqdm
 
 
+# Şehirleri bu websitesiden çekiyoruz.
+# https://en.wikipedia.org/wiki/List_of_national_capitals
+# Burada web kazıma işlemi dönüyor kısaca.
 def getCities():
     url = 'https://en.wikipedia.org/wiki/List_of_national_capitals'
     response = requests.get(url)
@@ -19,7 +22,8 @@ def getCities():
 
     return cities
 
-
+# Şehirler veritabanı burada oluşturuluyor.
+# Veritabanı olarak sqlite3'ü kullanıyoruz.
 def createCitiesDB():
     print("Şehir veritabanı oluşturuluyor...")
     conn = sqlite3.connect('dbs/cities.db')
@@ -29,7 +33,8 @@ def createCitiesDB():
     conn.close()
     print("Şehir veritabanı oluşturuldu.")
 
-
+# Oluşturduğumuz veritabanına şehirleri yazıyoruz.
+# Buralarda çok bir şey yok zaten.
 def writeCities(cities):
     conn = sqlite3.connect('dbs/cities.db')
     c = conn.cursor()
